@@ -1,0 +1,38 @@
+class Coupon{
+  final String name;
+  final String imagePath;
+  final int ratings;
+  final double price;
+  final double discount;
+  final double discount_percent;
+
+Coupon({this.name, this.imagePath, this.ratings, this.price, this.discount, this.discount_percent});
+
+
+}
+final coupons = [
+  Coupon(
+    name: "Krispy Kreme",
+imagePath: "Asset/donuts.jpg",
+      ratings: 47966,
+    price: 27.96,
+      discount: 13,
+      discount_percent: 53,
+  ),
+  Coupon(
+      name: "Costco",
+      imagePath: "Asset/costco.jpg",
+      ratings: 56,
+  price: 60,
+  discount: 48,
+  discount_percent: 20,
+  ),
+  Coupon(
+    name: "e",
+    imagePath: "Asset/costco.jpg",
+    ratings: 56,
+    price: 60,
+    discount: 48,
+    discount_percent: 20,
+  ),
+];

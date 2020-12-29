@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:groupon/models/featured_item';
+import 'package:groupon/models/uid.dart';
+import 'package:groupon/services/database.dart';
+import 'package:groupon/widgets/trendingCoupon.dart';
+
 
 class Saved extends StatefulWidget {
   @override
@@ -16,6 +21,41 @@ class _SavedState extends State<Saved> {
       ),
       body: Column(
         children: <Widget>[
+
+
+StreamBuilder<List<Coupon>>(
+  stream: DatabaseService(uid: current_user_uid).recentlyViewedData,
+  builder: (context, snapshot) {
+if(snapshot.hasData){
+List<Coupon> couponData=snapshot.data;
+List<Trending_Coupons> savedCoupons=[];
+for (var coupon in couponData) {
+  final couponWidget = Trending_Coupons(
+   name: coupon.name,
+    price: coupon.price,
+    imagePath: coupon.imagePath,
+    ratings: coupon.ratings,
+    discount: coupon.discount,
+    discountPercent: coupon.discount_percent,
+  );
+  savedCoupons.add(couponWidget);
+}
+    return Expanded(
+      child: ListView(
+        children: <Widget> [ Column(
+          children: savedCoupons,
+        ),
+        ]
+      ),
+    );
+    }
+    else{
+      return Container();
+    }
+
+  }
+),
+
           Container(
             height: 50.0,
 
@@ -33,9 +73,10 @@ class _SavedState extends State<Saved> {
               ],
             ),
           ),
-
         ],
       )
     );
   }
 }
+
+

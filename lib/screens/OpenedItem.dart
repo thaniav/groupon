@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:groupon/models/uid.dart';
+import 'package:groupon/services/database.dart';
 
 class OpenedItem extends StatefulWidget {
   final String name;
@@ -116,7 +118,41 @@ child: Icon(
 
           Divider(),
           ListTile(
-            title: Text("Description"),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text("Description"),
+                InkWell(
+                  splashColor: Colors.green,
+                  onTap: () async {
+await DatabaseService(uid: current_user_uid).updateRecentlyViewed(
+    widget.name, widget.imagePath, widget.ratings, widget.price, widget.discount, widget.discountPercent);
+                  },
+                  child: Container(
+width: 100.0,
+                   decoration: BoxDecoration(
+                     border: Border.all(
+                       width: 1.0
+
+                     )
+                   ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Text('Save'),
+                        IconButton(
+                          onPressed: (){
+
+                          },
+                          color: Colors.pink,
+                          icon: Icon(Icons.favorite),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
 
           ),
 
